@@ -7,8 +7,11 @@ def emotion_detector(text_to_analyze):  # Define a function named sentiment_anal
     myobj = { "raw_document": { "text": text_to_analyze } }
     response = requests.post(url, json = myobj, headers=header)  # Send a POST request to the API with the text and headers
     formatted_response = json.loads(response.text)
+
     emotions =  formatted_response['emotionPredictions'][0]['emotion']
+    
     dominant_emotion = max(emotions.items(),key=lambda x: x[1])
     emotions['dominant_emotion']=dominant_emotion
-    
     return emotions
+
+    
